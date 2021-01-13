@@ -1,0 +1,69 @@
+﻿@model IEnumerable<IvyMovies.Data.Entities.Actor>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Actor List</h1>
+
+<div class="custom-container">
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th colspan="3">
+                <a asp-action="Create" class="btn btn-success btn-block">Create New Actor</a>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActorName)
+            </th>
+            @*<th style="width: 40%;">
+                @Html.DisplayNameFor(model => model.ActorBirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Awards)
+            </th>*@
+            <th colspan="3">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActorName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ActorBirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Awards)
+            </td>*@
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ActorId" class="btn btn-block btn-primary"> &nbsp; Edit</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ActorId" class="btn btn-block btn-info"> &nbsp; Details</a>
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.ActorId" class="btn btn-block btn-danger"> &nbsp; Delete </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+

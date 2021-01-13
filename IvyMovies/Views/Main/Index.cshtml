@@ -1,0 +1,99 @@
+﻿@model IEnumerable<IvyMovies.Data.Entities.Movie>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="bg-dark text-white text-center p-3">Movie List</h1>
+<div>
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <a asp-action="Create" class="btn btn-success m-3" style="float:right">
+                <i class="fas fa-plus"></i> Create
+            </a>
+        </div>
+    </div>
+</div>
+<div class="custom-container">
+    <table id="movieDataTable" class="table table-striped row-border" style="width:100%">
+        <thead class="thead-dark">
+            <tr>
+                <th> Movie Title </th>
+                <th> Genre </th>
+                <th> Directors</th>
+                <th> Actors </th>
+                <th> Actions </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#movieDataTable').DataTable({
+                ajax: {
+                    url: '/Main/FillMovieDataTable',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: "movieTitle",
+                        autoWidth:true
+
+                    },
+                    {
+                           data: 'movieId',
+                           render: function (data) {
+                                   var editUrl = '@Url.Action("Edit", "Movies")/' + data;
+                                   var detailsUrl = '@Url.Action("Details", "Movies")/' + data;
+                                   var deleteUrl = '@Url.Action("Delete", "Movies")/' + data;
+                                   return '<a href="' + editUrl +'"class="table-action-btn btn btn-block btn-primary"><i class="fas fa-edit"></i> &nbsp; Edit</a>' +
+                                           '<a  href="'+ detailsUrl +'"class="table-action-btn btn btn-block btn-info"><i class="fas fa-info-circle"></i> &nbsp;Details</a>' +
+                                           '<a href="'+ deleteUrl +'"class="table-action-btn btn btn-block btn-danger"><i class="fas fa-trash-alt"></i> &nbsp; Delete </a>';
+                            },
+                           width: "150px"
+                    }
+                ]
+            });
+        });
+
+                @*columns: [
+                    {
+                        "data": "Ime Na Prop",
+                        "autoWidth": true
+                    },
+                    {
+                        "data": "Ime Na Prop",
+                        "autoWidth": true
+                    },
+                    {
+                        "data": "Ime Na Prop",
+                        "autoWidth": true
+                    },
+                    {
+                        "data": "Ime Na Prop",
+                        "autoWidth": true
+                    },
+                    {
+                        data: 'Id',
+                        render: function (data, type, row) {
+                            var editUrl = '@Url.Action("Edit", "Movies")/' + data;
+                            var detailsUrl = '@Url.Action("Edit", "Movies")/' + data;
+                            var deleteUrl = '@Url.Action("Edit", "Movies")/' + data;
+                            return '<a href="' + editUrl + '"class="table-action-btn btn btn-block btn-primary">' +
+                                '<i class="fas fa-edit"></i> &nbsp; Edit' +
+                                '</a>' +
+                                '<a  href="' + detailsUrl + '"class="table-action-btn btn btn-block btn-info">' +
+                                '<i class="fas fa-info-circle"></i> &nbsp; Details' +
+                                '</a>' +
+                                '<a  href="' + deleteUrl + '"class="table-action-btn btn btn-block btn-danger">' +
+                                ' <i class="fas fa-trash-alt"></i> &nbsp; Delete' +
+                                '</a>';
+                        },
+                        width: "150px"
+                    }
+                ]*@
+            //});
+    </script>
+}

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<IvyMovies.Data.Entities.Movie>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+    <div class="container-fluid">
+        <form asp-controller="Home" asp-action="Index">
+            <p>
+                Title: <input type="text" name="SearchString">
+                <input type="submit" value="Filter" />
+            </p>
+        </form>
+
+
+
+        @foreach (var item in Model)
+        {
+        <div>
+            @Html.DisplayFor(itemModel => item.MovieName)
+        </div>
+        }
+    </div>
